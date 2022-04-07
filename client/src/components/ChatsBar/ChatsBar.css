@@ -1,0 +1,28 @@
+.chatsBar{
+    flex: 3;
+}
+.chatList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.friend{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.nameContainer{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.online{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: limegreen;  
+    position: absolute;
+}
+.userName{
+ margin-left: 14px;
+}
