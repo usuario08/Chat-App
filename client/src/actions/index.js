@@ -3,7 +3,7 @@ import axios from "axios";
 
 export function listUser() {
   return async function (dispatch) {
-    let { data } = await axios.get(`https://localhost:3001/api/users`);
+    let { data } = await axios.get(`/users`);
     return dispatch({
       type: LIST_USER,
       payload: data,

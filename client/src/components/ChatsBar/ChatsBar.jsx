@@ -14,7 +14,7 @@ export const ChatsBar = () => {
       <ul className="chatList">
         {allUsers?.map((e) => {
           return (
-            <li className="friend">
+            <li className="friend" key={e._id}>
               <div className="nameContainer">
                 <span className="userName">{e.username}</span>
                 <span className="online"></span>

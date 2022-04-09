@@ -1,12 +1,24 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
-import {useRef} from "react"
+import { Link,useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import AuthService from "../../services/auth_service.js";
 
 export const Login = () => {
   const email = useRef();
   const password = useRef();
-  const hanldeClick = (e) => {
+
+  const navigate = useNavigate();
+
+  const hanldeClick = async (e) => {
     e.preventDefault();
+    try {
+      await AuthService.login(email.current.value, password).then(() => {
+        navigate(`/home`);
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
