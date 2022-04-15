@@ -47,3 +47,6 @@
 .logoutIcon{
     cursor: pointer;
 }
+.logoutIcon:hover{
+    background-color:red;
+}

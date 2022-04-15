@@ -1,6 +1,6 @@
 import "./Login.css";
-import { Link,useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import AuthService from "../../services/auth_service.js";
 
 export const Login = () => {
@@ -9,13 +9,20 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) navigate("/home");
+  }, []);
+
   const hanldeClick = async (e) => {
     e.preventDefault();
     try {
-      await AuthService.login(email.current.value, password).then(() => {
-        navigate(`/home`);
-        window.location.reload();
-      });
+      await AuthService.login(email.current.value, password.current.value).then(
+        () => {
+          navigate(`/home`);
+          window.location.reload();
+        }
+      );
     } catch (error) {
       console.log(error);
     }

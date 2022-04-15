@@ -1,12 +1,12 @@
 import { LIST_USER } from "./actionsName";
-import axios from "axios";
+import postService from "../services/post_service";
 
 export function listUser() {
   return async function (dispatch) {
-    let { data } = await axios.get(`/users`);
+    let users = await postService.getAllUser();
     return dispatch({
       type: LIST_USER,
-      payload: data,
+      payload: users,
     });
   };
 }
