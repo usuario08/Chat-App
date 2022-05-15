@@ -11,11 +11,12 @@ const login = async ({ body: { email, password } }, res) => {
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
+
     if (!validPassword) {
       res.status(400).send({ message: "INCORRECT PASSWORD" });
       return;
     }
-    const token = await genJWT(user.id);
+    const token = await genJWT(user._id);
     res.send({ message: "LOGIN SUCCESSFUL", token });
   } catch (error) {
     console.error(error);

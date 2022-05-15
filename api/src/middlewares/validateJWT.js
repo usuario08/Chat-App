@@ -5,12 +5,9 @@ const validateJWT = async (req, res, next) => {
   if (!token) {
     return res.status(401).json({ errors: "NO TOKEN IN REQUEST" });
   }
-  // if (token.startsWith("Bearer ")) {
-  //   token = token.slice(7, token.length);
-  // }
   try {
     const { id } = jwt.verify(token, "palabrasecreta");
-    // console.log(id);
+     console.log(id);
     req.id = id;
     next();
   } catch (error) {

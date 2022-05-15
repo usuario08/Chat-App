@@ -9,12 +9,18 @@ const signup = (username, email, password) => {
     });
 };
 
-const login = (email, password) => {
-  return axios.post(`/users/login`, { email, password }).then((response) => {
-    if (response.data.token)
-      localStorage.setItem("user", JSON.stringify(response.data));
-    return response.data;
-  });
+const login = async (email, password) => {
+  try {
+    let { data } = await axios.post(`/users/login`, { email, password });
+    if (data.token) {
+      localStorage.setItem("user", JSON.stringify(data));
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
 };
 
 const logout = () => {

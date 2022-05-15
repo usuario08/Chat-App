@@ -1,5 +1,6 @@
 .chatsBar{
     flex: 3;
+    background-color: rgb(92, 179, 255);
 }
 .chatList{
     padding: 0;
@@ -11,12 +12,14 @@
     align-items: center;
     margin: 7px 0px 7px 0;
     cursor: pointer;
+    padding: 0px;
 }
 
 .nameContainer{
     position: relative;
     display: flex;
     align-items: center;
+    margin: 0px 10px 0px 10px;
 }
 .online{
     width: 10px;

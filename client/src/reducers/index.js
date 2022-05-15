@@ -1,6 +1,11 @@
-import { LIST_USER } from "../actions/actionsName";
+import {
+  LIST_USER,
+  LOADING,
+} from "../actions/actionsName";
 const initialState = {
   users: [],
+  user: null,
+  loading: false,
 };
 
 // function rootReducer(state = initialState, action)
@@ -11,6 +16,12 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         users: payload,
       };
+    case LOADING:
+      return {
+        ...state,
+        loading: payload,
+      };
+
     default:
       return state;
   }

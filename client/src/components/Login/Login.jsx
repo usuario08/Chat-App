@@ -1,12 +1,17 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AuthService from "../../services/auth_service.js";
+import CircularProgress from "@mui/material/CircularProgress";
+import { loading } from "../../actions/index";
 
 export const Login = () => {
   const email = useRef();
   const password = useRef();
-
+  const [errorLogin, setErrorLogin] = useState(false);
+  const load = useSelector((state) => state.loading);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,15 +21,17 @@ export const Login = () => {
 
   const hanldeClick = async (e) => {
     e.preventDefault();
-    try {
-      await AuthService.login(email.current.value, password.current.value).then(
-        () => {
-          navigate(`/home`);
-          window.location.reload();
-        }
-      );
-    } catch (error) {
-      console.log(error);
+    const rpta = await AuthService.login(
+      email.current.value,
+      password.current.value
+    );
+    if (rpta) {
+      dispatch(loading(true));
+      navigate(`/home`);
+      window.location.reload();
+    } else {
+      setErrorLogin(true);
+      dispatch(loading(false));
     }
   };
 
@@ -45,6 +52,7 @@ export const Login = () => {
               type="email"
               className="loginInput"
               ref={email}
+              onChange={(e) => errorLogin && setErrorLogin(false)}
             />
             <input
               placeholder="Contraseña"
@@ -53,8 +61,18 @@ export const Login = () => {
               type="password"
               className="loginInput"
               ref={password}
+              onChange={(e) => errorLogin && setErrorLogin(false)}
             />
-            <button className="loginBtn">Ingresar</button>
+            {errorLogin && (
+              <p className="errorLogin">Correo o contraseña incorrecta</p>
+            )}
+            <button className="loginBtn">
+              {load ? (
+                <CircularProgress color="inherit" size="27px" />
+              ) : (
+                "Ingresar"
+              )}
+            </button>
             <Link to="/register">
               <button className="loginRegisterBtn">Crear Cuenta</button>
             </Link>

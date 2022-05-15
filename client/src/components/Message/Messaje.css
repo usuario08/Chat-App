@@ -1,0 +1,29 @@
+.msgContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 1px 0px 1px 0px;
+}
+.msgContainer.own {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.msgContainer.own .message {
+  background-color: teal;
+  border-radius: 8px;
+  padding: 5px;
+  width: 80%;
+  margin: 0;
+}
+.message {
+  background-color: rgb(114, 48, 158);
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+  width: 80%;
+  margin: 0;
+}
+.messageHour {
+  font-size: 10px;
+}

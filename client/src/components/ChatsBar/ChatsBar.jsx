@@ -2,22 +2,12 @@ import "./ChatsBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { listUser } from "../../actions";
-import { useNavigate } from "react-router-dom";
 
 export const ChatsBar = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.users);
   useEffect(() => {
-    dispatch(listUser()).then(
-      () => {},
-      (error) => {
-        console.log(error.response)
-        if (error.response && error.response.status === 401) {
-          navigate("/login");
-        }
-      }
-    );
+    dispatch(listUser());
   }, []);
   return (
     <div className="chatsBar">
